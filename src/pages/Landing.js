@@ -20,7 +20,34 @@ const Landing = () => {
 
     useEffect(() => {
         getProducts(15, 0, null, true)
+        getPx()
     }, [])
+
+    const getPx = async (limit) => {
+        const params = {
+            limit,
+            // offset,
+            // search,
+            // is_active,
+        }
+        setIsLoading(true)
+        axios.get(`https://fakestoreapi.com/products`, {params})
+        .then(res => {
+            const sortedData = res.data.sort((a, b) => {
+                return b.rating.count - a.rating.count
+            })
+            console.log(sortedData)
+            console.log(res)
+            setNewProducts(res.data.slice(0, 5))
+            setProducts(res.data)
+            setProductsLimit(limit)
+            setIsLoading(false)
+        })
+        .catch(err => {
+            console.log(err)
+            setIsLoading(false)
+        })
+    }
 
     const getProducts = async (limit, offset, search, is_active) => {
         const params = {
@@ -32,10 +59,10 @@ const Landing = () => {
         setIsLoading(true)
         axios.get(`${baseUrl}/product`, {params})
         .then(res => {
-            console.log(res.data)
-            setNewProducts(res.data.slice(0, 5))
-            setProducts(res.data)
-            setProductsLimit(limit)
+            // console.log(res.data)
+            // setNewProducts(res.data.slice(0, 5))
+            // setProducts(res.data)
+            // setProductsLimit(limit)
             setIsLoading(false)
         })
         .catch(err => {
@@ -66,17 +93,17 @@ const Landing = () => {
 
     return (
         <>
-            <Navbar getProducts={getProducts} ></Navbar>
+            <Navbar getProducts={getProducts} getPx={getPx} ></Navbar>
             {/* product list */}
             <div className='mt-32 max-w-screen-2xl items-center justify-between mx-auto p-4'>
-                <div className="mx-10 mb-8 w-[90rem] flex justify-center h-96">
+                <div className=" mb-8 w-full flex  h-96">
                     <Carousel>
                         <img src={perfume1} alt="..." />
                         <img src={perfume2} alt="..." />
                         <img src={perfume3} alt="..." />
                     </Carousel>
                     </div>
-                <div className='newest-newest-product mb-8'>
+                {/* <div className='newest-newest-product mb-8'>
                     <h1 className='font-bold text-2xl ml-10'>Terbaru</h1>
                     {!!isLoading &&
                         <div className='flex m-4 justify-center'>
@@ -85,7 +112,7 @@ const Landing = () => {
                     }
                     <div className='flex my-4'>
                         <button onClick={previousProducts} type='button'><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M15.293 3.293 6.586 12l8.707 8.707 1.414-1.414L9.414 12l7.293-7.293-1.414-1.414z"/></svg></button>
-                        <div className='flex mx-4 w-full'>
+                        <div className='flex gap-2 mx-4 w-full'>
                              {!!newProducts.length &&
                                 newProducts.map((product, i) => {
                                     return <ProductCard product={product} key={i}/>
@@ -94,7 +121,7 @@ const Landing = () => {
                         </div>
                         <button onClick={nextProducts} type='button'><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M7.293 4.707 14.586 12l-7.293 7.293 1.414 1.414L17.414 12 8.707 3.293 7.293 4.707z"/></svg></button>
                     </div>
-                </div>
+                </div> */}
                 <div className='available-product'>
                     <h1 className='font-bold text-2xl ml-10'>Produk Tersedia</h1>
                     {!!isLoading &&
@@ -102,8 +129,8 @@ const Landing = () => {
                             <Spinner color="info" aria-label="Info spinner example" />
                         </div>
                     }
-                    <div className='flex my-4 ml-6'>
-                        <div className='flex flex-wrap mx-4 w-full'>
+                    <div className='flex my-4 '>
+                        <div className='flex gap-2 flex-wrap mx-4 w-full'>
                             {!!products.length &&
                                 products.map((product, i) => {
                                     return <ProductCard product={product} key={i}/>

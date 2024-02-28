@@ -8,10 +8,10 @@ const ProductCard = ({product}) => {
         </a>
         <div className="px-5 pb-5">
             <div className="flex items-center justify-between">
-                <span className="text-l font-bold text-black-600 dark:text-white">{product.name}</span>
+                <span className="text-l font-bold text-black-600 dark:text-white">{product.title}</span>
             </div>
             <div className="flex items-center justify-between">
-                <span className="text-l font-bold text-blue-600 dark:text-white">IDR {product.price}</span>
+                <span className="text-l font-bold text-slate-800 dark:text-white">$ {product.price}</span>
             </div>
         </div>
     </div>
