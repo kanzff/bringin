@@ -21,6 +21,7 @@ const Landing = () => {
     // const [productsLimit, setProductsLimit] = useState(15)
     const [isLoading, setIsLoading] = useState(false)
     const [currentPage, setCurrentPage] = useState(1);
+    const [cart, setCart] = useState([])
 
 
     useEffect(() => {
@@ -77,6 +78,13 @@ const Landing = () => {
         setProducts(temp)
     }
 
+    const addToCart = (item) => {
+        setCart([...cart, {
+            productId: item.id,
+            quantity: item.quantity
+        }])
+    }
+
     const getProducts = async (limit, offset, search, is_active) => {
         const params = {
             limit,
@@ -128,7 +136,7 @@ const Landing = () => {
                     <div>
                         <h1 className='font-bold text-2xl ml-10 mb-6'>Top Products</h1>
                         <div className=" mb-8 w-full flex  ">
-                            <Carousel slideInterval={2000} className='bg-slate-400 px-20 pt-6 pb-12'>
+                            <Carousel slideInterval={2000} className='bg-cyan-700 rounded-lg px-20 pt-6 pb-12'>
                                 <WideProductCard product={topProducts[0]}/>
                                 <WideProductCard product={topProducts[1]}/>
                                 <WideProductCard product={topProducts[2]}/>
