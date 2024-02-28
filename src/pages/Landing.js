@@ -5,11 +5,11 @@ import ProductCard from '../components/ProductCard'
 import Footer from '../components/Footer'
 import axios from 'axios'
 import { baseUrl } from '../api/api'
-import { Carousel, Spinner } from 'flowbite-react'
+import { Carousel, Spinner, Pagination } from 'flowbite-react'
 // import perfume1 from '../assets/perfume_1.jpg'
 // import perfume2 from '../assets/perfume_2.jpg'
 // import perfume3 from '../assets/perfume_3.jpg'
-import WideProductCard from '../components/WideProductCard copy'
+import WideProductCard from '../components/WideProductCard'
 
 const Landing = () => {
 
@@ -19,11 +19,15 @@ const Landing = () => {
     const [topProducts, setTopProducts] = useState([])
     const [productsLimit, setProductsLimit] = useState(15)
     const [isLoading, setIsLoading] = useState(false)
+    const [currentPage, setCurrentPage] = useState(2);
+
 
     useEffect(() => {
         // getProducts(15, 0, null, true)
         getPx()
     }, [])
+
+    const onPageChange = (page) => setCurrentPage(page);
 
     const getPx = async (limit) => {
         const params = {
@@ -35,7 +39,7 @@ const Landing = () => {
         setIsLoading(true)
         axios.get(`https://fakestoreapi.com/products`, {params})
         .then(res => {
-            setProducts([...res.data])
+            splitProducts([...res.data])
             const sortedData = res.data.sort((a, b) => {
                 return b.rating.rate - a.rating.rate
             })
@@ -54,6 +58,16 @@ const Landing = () => {
             console.log(err)
             setIsLoading(false)
         })
+    }
+
+    const splitProducts = (arr) => {
+        let temp = []
+        for (let i = 0; i < arr.length; i += 10) {
+            temp.push(arr.slice(i, i + 10));
+        }
+        console.log('new', temp)
+        setProducts(temp)
+        console.log('length', products.length)
     }
 
     const getProducts = async (limit, offset, search, is_active) => {
@@ -144,22 +158,21 @@ const Landing = () => {
                             <Spinner color="info" aria-label="Info spinner example" />
                         </div>
                     }
-                    <div className='flex my-4 '>
-                        <div className='flex gap-2 flex-wrap mx-4 w-full'>
-                            {!!products.length &&
-                                products.map((product, i) => {
-                                    return <ProductCard product={product} key={i}/>
-                                })
-                            }
+                    {!!products[currentPage - 1] &&
+                        <div className='flex my-4 '>
+                            <div className='flex gap-2 flex-wrap mx-4 w-full'>
+                                {!!products[currentPage - 1].length &&
+                                    products[currentPage - 1].map((product, i) => {
+                                        return <ProductCard product={product} key={i}/>
+                                    })
+                                }
 
+                            </div>
                         </div>
-                    </div>
-                    {!!isLoading ? 
-                        <div className='flex m-4 justify-center'>
-                            <Spinner color="info" aria-label="Info spinner example" />
-                        </div> :
+                    }
+                    {!!products.length &&
                         <div className='flex justify-center'>
-                            <button onClick={() => getProducts(productsLimit + 5, 0)} type="button" className="ml-10 text-blue-600 border border-blue-600 hover:bg-slate-100 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Lihat lebih banyak</button>
+                            <Pagination currentPage={currentPage} totalPages={2} onPageChange={onPageChange} />
                         </div>
                     }
                 </div>
