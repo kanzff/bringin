@@ -19,7 +19,7 @@ const Landing = () => {
     const [topProducts, setTopProducts] = useState([])
     const [productsLimit, setProductsLimit] = useState(15)
     const [isLoading, setIsLoading] = useState(false)
-    const [currentPage, setCurrentPage] = useState(2);
+    const [currentPage, setCurrentPage] = useState(1);
 
 
     useEffect(() => {
@@ -27,7 +27,10 @@ const Landing = () => {
         getPx()
     }, [])
 
-    const onPageChange = (page) => setCurrentPage(page);
+    const onPageChange = (page) => {
+        setCurrentPage(page);
+        console.log('length', products.length)
+    }
 
     const getPx = async (limit) => {
         const params = {
@@ -65,9 +68,7 @@ const Landing = () => {
         for (let i = 0; i < arr.length; i += 10) {
             temp.push(arr.slice(i, i + 10));
         }
-        console.log('new', temp)
         setProducts(temp)
-        console.log('length', products.length)
     }
 
     const getProducts = async (limit, offset, search, is_active) => {
@@ -172,7 +173,7 @@ const Landing = () => {
                     }
                     {!!products.length &&
                         <div className='flex justify-center'>
-                            <Pagination currentPage={currentPage} totalPages={2} onPageChange={onPageChange} />
+                            <Pagination currentPage={currentPage} totalPages={products.length} onPageChange={onPageChange} />
                         </div>
                     }
                 </div>
