@@ -16,8 +16,9 @@ const Landing = () => {
     // const [newProducts, setNewProducts] = useState([])
     // const [newProductsIndex, setNewProductsIndex] = useState({start: 0, end: 6})
     const [products, setProducts] = useState([])
+    const [fullProducts, setFullProducts] = useState([])
     const [topProducts, setTopProducts] = useState([])
-    const [productsLimit, setProductsLimit] = useState(15)
+    // const [productsLimit, setProductsLimit] = useState(15)
     const [isLoading, setIsLoading] = useState(false)
     const [currentPage, setCurrentPage] = useState(1);
 
@@ -29,7 +30,11 @@ const Landing = () => {
 
     const onPageChange = (page) => {
         setCurrentPage(page);
-        console.log('length', products.length)
+    }
+
+    const searchProducts = (search) => {
+        const filtered = fullProducts.filter(e => e.title.toLowerCase().includes(search.toLowerCase()));
+        splitProducts(filtered)
     }
 
     const getPx = async (limit) => {
@@ -42,6 +47,7 @@ const Landing = () => {
         setIsLoading(true)
         axios.get(`https://fakestoreapi.com/products`, {params})
         .then(res => {
+            setFullProducts([...res.data])
             splitProducts([...res.data])
             const sortedData = res.data.sort((a, b) => {
                 return b.rating.rate - a.rating.rate
@@ -54,7 +60,7 @@ const Landing = () => {
             setTopProducts(newTopProducts)
             // console.log('all', res.data)
             // setNewProducts(res.data.slice(0, 5))
-            setProductsLimit(limit)
+            // setProductsLimit(limit)
             setIsLoading(false)
         })
         .catch(err => {
@@ -115,7 +121,7 @@ const Landing = () => {
 
     return (
         <>
-            <Navbar getProducts={getProducts} getPx={getPx} ></Navbar>
+            <Navbar searchProducts={searchProducts} getPx={getPx} ></Navbar>
             {/* product list */}
             <div className='mt-32 max-w-screen-2xl items-center justify-between mx-auto p-4'>
                 {!!topProducts.length &&
