@@ -6,22 +6,22 @@ import Footer from '../components/Footer'
 import axios from 'axios'
 import { baseUrl } from '../api/api'
 import { Carousel, Spinner } from 'flowbite-react'
-import perfume1 from '../assets/perfume_1.jpg'
-import perfume2 from '../assets/perfume_2.jpg'
-import perfume3 from '../assets/perfume_3.jpg'
+// import perfume1 from '../assets/perfume_1.jpg'
+// import perfume2 from '../assets/perfume_2.jpg'
+// import perfume3 from '../assets/perfume_3.jpg'
 import WideProductCard from '../components/WideProductCard copy'
 
 const Landing = () => {
 
-    const [newProducts, setNewProducts] = useState([])
-    const [newProductsIndex, setNewProductsIndex] = useState({start: 0, end: 6})
+    // const [newProducts, setNewProducts] = useState([])
+    // const [newProductsIndex, setNewProductsIndex] = useState({start: 0, end: 6})
     const [products, setProducts] = useState([])
     const [topProducts, setTopProducts] = useState([])
     const [productsLimit, setProductsLimit] = useState(15)
     const [isLoading, setIsLoading] = useState(false)
 
     useEffect(() => {
-        getProducts(15, 0, null, true)
+        // getProducts(15, 0, null, true)
         getPx()
     }, [])
 
@@ -35,6 +35,7 @@ const Landing = () => {
         setIsLoading(true)
         axios.get(`https://fakestoreapi.com/products`, {params})
         .then(res => {
+            setProducts([...res.data])
             const sortedData = res.data.sort((a, b) => {
                 return b.rating.rate - a.rating.rate
             })
@@ -42,11 +43,10 @@ const Landing = () => {
             for (let i = 0; i < sortedData.length; i += 3) {
                 newTopProducts.push(sortedData.slice(i, i + 3));
             }
-            console.log('new', newTopProducts)
+            // console.log('new', newTopProducts)
             setTopProducts(newTopProducts)
-            console.log(res)
-            setNewProducts(res.data.slice(0, 5))
-            setProducts(res.data)
+            // console.log('all', res.data)
+            // setNewProducts(res.data.slice(0, 5))
             setProductsLimit(limit)
             setIsLoading(false)
         })
@@ -78,25 +78,25 @@ const Landing = () => {
         })
     }
 
-    const nextProducts = () => {
-        if (newProductsIndex.start === 0 ) {
-            setNewProducts(products.slice(5, 10))
-            setNewProductsIndex({start: 5, end: 10})
-        } else {
-            setNewProducts(products.slice(10, 15))
-            setNewProductsIndex({start: 10, end: 15})
-        }
-    }
+    // const nextProducts = () => {
+    //     if (newProductsIndex.start === 0 ) {
+    //         setNewProducts(products.slice(5, 10))
+    //         setNewProductsIndex({start: 5, end: 10})
+    //     } else {
+    //         setNewProducts(products.slice(10, 15))
+    //         setNewProductsIndex({start: 10, end: 15})
+    //     }
+    // }
 
-    const previousProducts = () => {
-        if (newProductsIndex.start === 10 ) {
-            setNewProducts(products.slice(5, 10))
-            setNewProductsIndex({start: 5, end: 10})
-        } else {
-            setNewProducts(products.slice(0, 5))
-            setNewProductsIndex({start: 0, end: 5})
-        }
-    }
+    // const previousProducts = () => {
+    //     if (newProductsIndex.start === 10 ) {
+    //         setNewProducts(products.slice(5, 10))
+    //         setNewProductsIndex({start: 5, end: 10})
+    //     } else {
+    //         setNewProducts(products.slice(0, 5))
+    //         setNewProductsIndex({start: 0, end: 5})
+    //     }
+    // }
 
     return (
         <>
@@ -106,8 +106,8 @@ const Landing = () => {
                 {!!topProducts.length &&
                     <div>
                         <h1 className='font-bold text-2xl ml-10 mb-6'>Top Products</h1>
-                        <div className=" mb-8 w-full flex  h-96">
-                            <Carousel>
+                        <div className=" mb-8 w-full flex  ">
+                            <Carousel slideInterval={2000} className='bg-slate-400 px-20 pt-6 pb-12'>
                                 <WideProductCard product={topProducts[0]}/>
                                 <WideProductCard product={topProducts[1]}/>
                                 <WideProductCard product={topProducts[2]}/>

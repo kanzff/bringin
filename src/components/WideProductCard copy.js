@@ -1,7 +1,7 @@
 import React from 'react'
 
 const WideProductCard = ({product}) => {
-    console.log(product)
+    // console.log(product)
   return (
     <div className='flex w-full gap-2 justify-between'>
         <div className="w-72 h-86 max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
