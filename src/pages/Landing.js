@@ -9,12 +9,14 @@ import { Carousel, Spinner } from 'flowbite-react'
 import perfume1 from '../assets/perfume_1.jpg'
 import perfume2 from '../assets/perfume_2.jpg'
 import perfume3 from '../assets/perfume_3.jpg'
+import WideProductCard from '../components/WideProductCard copy'
 
 const Landing = () => {
 
     const [newProducts, setNewProducts] = useState([])
     const [newProductsIndex, setNewProductsIndex] = useState({start: 0, end: 6})
     const [products, setProducts] = useState([])
+    const [topProducts, setTopProducts] = useState([])
     const [productsLimit, setProductsLimit] = useState(15)
     const [isLoading, setIsLoading] = useState(false)
 
@@ -34,9 +36,14 @@ const Landing = () => {
         axios.get(`https://fakestoreapi.com/products`, {params})
         .then(res => {
             const sortedData = res.data.sort((a, b) => {
-                return b.rating.count - a.rating.count
+                return b.rating.rate - a.rating.rate
             })
-            console.log(sortedData)
+            let newTopProducts = []
+            for (let i = 0; i < sortedData.length; i += 3) {
+                newTopProducts.push(sortedData.slice(i, i + 3));
+            }
+            console.log('new', newTopProducts)
+            setTopProducts(newTopProducts)
             console.log(res)
             setNewProducts(res.data.slice(0, 5))
             setProducts(res.data)
@@ -96,13 +103,21 @@ const Landing = () => {
             <Navbar getProducts={getProducts} getPx={getPx} ></Navbar>
             {/* product list */}
             <div className='mt-32 max-w-screen-2xl items-center justify-between mx-auto p-4'>
-                <div className=" mb-8 w-full flex  h-96">
-                    <Carousel>
-                        <img src={perfume1} alt="..." />
-                        <img src={perfume2} alt="..." />
-                        <img src={perfume3} alt="..." />
-                    </Carousel>
+                {!!topProducts.length &&
+                    <div>
+                        <h1 className='font-bold text-2xl ml-10 mb-6'>Top Products</h1>
+                        <div className=" mb-8 w-full flex  h-96">
+                            <Carousel>
+                                <WideProductCard product={topProducts[0]}/>
+                                <WideProductCard product={topProducts[1]}/>
+                                <WideProductCard product={topProducts[2]}/>
+                                {/* <img src={perfume1} alt="..." />
+                                <img src={perfume2} alt="..." />
+                                <img src={perfume3} alt="..." /> */}
+                            </Carousel>
+                        </div>
                     </div>
+                }
                 {/* <div className='newest-newest-product mb-8'>
                     <h1 className='font-bold text-2xl ml-10'>Terbaru</h1>
                     {!!isLoading &&
@@ -123,7 +138,7 @@ const Landing = () => {
                     </div>
                 </div> */}
                 <div className='available-product'>
-                    <h1 className='font-bold text-2xl ml-10'>Produk Tersedia</h1>
+                    <h1 className='font-bold text-2xl ml-10'>Available Products</h1>
                     {!!isLoading &&
                         <div className='flex m-4 justify-center'>
                             <Spinner color="info" aria-label="Info spinner example" />
