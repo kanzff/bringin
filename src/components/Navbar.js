@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import bit_logo  from '../assets/bit_logo.jpg'
 
-const Navbar = ({searchProducts}) => {
+const Navbar = ({setCurrentTab, searchProducts, cartCount}) => {
     const navigate = useNavigate()
     const access_token = localStorage.getItem('access_token')
 
@@ -36,18 +36,8 @@ const Navbar = ({searchProducts}) => {
                             </button>
                         </div>
                     </form>
-                </div>
-                <div className="flex ">
-                    {!access_token ?
-                        <>
-                            <button onClick={() => navigate('/register')} type="button" className="mr-4 text-blue-600 border border-blue-600 hover:bg-slate-100  font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Daftar</button>
-                            <button onClick={() => navigate('/login')} type="button" className=" mr-2 text-blue-600 border border-blue-600 hover:bg-slate-100 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Masuk</button>
-                        </> 
-                        :
-                        <button onClick={logout} type="button" className=" mr-2 text-blue-600 border border-blue-600 hover:bg-slate-100 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Keluar</button>
-
-                    }
-                </div>
+                </div>  
+                <button onClick={() => setCurrentTab('Cart')} type="button" className="mr-4 text-cyan-700 border border-cyan-700 hover:bg-slate-100  font-bold rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Cart {cartCount}</button>      
             </div>
         </nav>
     )

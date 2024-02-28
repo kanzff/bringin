@@ -1,7 +1,16 @@
 import { Button } from 'flowbite-react'
 import React from 'react'
 
-const ProductCard = ({product}) => {
+const ProductCard = ({product, addToCart}) => {
+
+  const handleAdd = () => {
+    addToCart({
+        ...product,
+        productId: product.id,
+        quantity: 1
+    })
+  }
+
   return (
     <div className="w-72 h-86 max-w-sm bg-white border border-gray-200 rounded-md shadow dark:bg-gray-800 dark:border-gray-700">
         <a href="#" className='flex justify-center'>
@@ -15,7 +24,7 @@ const ProductCard = ({product}) => {
                 <span className="text-l font-bold text-slate-800 dark:text-white">$ {product.price}</span>
             </div>
             <div>
-                <Button>+ Add to cart</Button>
+                <Button onClick={handleAdd}>+ Add to cart</Button>
             </div>
         </div>
     </div>
