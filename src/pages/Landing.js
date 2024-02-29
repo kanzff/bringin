@@ -12,14 +12,11 @@ import CheckoutForm from '../components/CheckoutForm'
 
 const Landing = () => {
 
-    // const [newProducts, setNewProducts] = useState([])
-    // const [newProductsIndex, setNewProductsIndex] = useState({start: 0, end: 6})
     const [currentTab, setCurrentTab] = useState('Main')
     const [currentProduct, setCurrentProduct] = useState({})
     const [products, setProducts] = useState([])
     const [fullProducts, setFullProducts] = useState([])
     const [topProducts, setTopProducts] = useState([])
-    // const [productsLimit, setProductsLimit] = useState(15)
     const [isLoading, setIsLoading] = useState(false)
     const [currentPage, setCurrentPage] = useState(1);
     const [cart, setCart] = useState([])
@@ -106,31 +103,30 @@ const Landing = () => {
                 totalPrice: item.price
             }])
         }
-        console.log('cart', cart)
         setCartCount(cartCount + 1)
     }
 
-    // const getProducts = async (limit, offset, search, is_active) => {
-    //     const params = {
-    //         limit,
-    //         offset,
-    //         search,
-    //         is_active,
-    //     }
-    //     setIsLoading(true)
-    //     axios.get(`${baseUrl}/product`, {params})
-    //     .then(res => {
-            // console.log(res.data)
-            // setNewProducts(res.data.slice(0, 5))
-            // setProducts(res.data)
-            // setProductsLimit(limit)
-    //         setIsLoading(false)
-    //     })
-    //     .catch(err => {
-    //         console.log(err)
-    //         setIsLoading(false)
-    //     })
-    // }
+    const removeFromCart = (item) => {
+        if (cart.find((e) => e.productId === item.id)) {
+            let newArr = []
+            cart.map((e) => {
+                if (e.productId === item.id) {
+                    if (e.quantity > 1) {
+                        newArr.push({
+                            ...item,
+                            productId: item.id,
+                            quantity: e.quantity - 1,
+                            totalPrice: Math.round((e.totalPrice - e.price) * 100) / 100
+                        })
+                    }
+                } else {
+                    newArr.push(e)
+                }
+            })
+            setCart(newArr)
+        }
+        setCartCount(cartCount - 1)
+    }
 
     return (
         <>
@@ -178,7 +174,7 @@ const Landing = () => {
                 </div>
             }
             {currentTab === 'Cart' &&
-                <Cart cart={cart} addToCart={addToCart} totalPrice={totalPrice} setCurrentTab={setCurrentTab} setCurrentProduct={setCurrentProduct}/>
+                <Cart cart={cart} addToCart={addToCart} removeFromCart={removeFromCart} totalPrice={totalPrice} setCurrentTab={setCurrentTab} setCurrentProduct={setCurrentProduct}/>
             }
             {currentTab === 'Detail' &&
                 <ProductDetail currentProduct={currentProduct} addToCart={addToCart} setCurrentTab={setCurrentTab}/>

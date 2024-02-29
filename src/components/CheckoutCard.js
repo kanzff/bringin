@@ -3,7 +3,7 @@ import React from 'react'
 import star from '../assets/star.png'
 
 
-const CheckoutCard = ({product, addToCart, setCurrentTab, setCurrentProduct}) => {
+const CheckoutCard = ({product, addToCart, setCurrentTab, setCurrentProduct, removeFromCart}) => {
 
   const handleAdd = () => {
     addToCart({
@@ -43,7 +43,7 @@ const CheckoutCard = ({product, addToCart, setCurrentTab, setCurrentProduct}) =>
             </div>
             <hr class="my-4 h-0.5 bg-slate-950"></hr>
             <div className='flex gap-4'>
-                <Button size='xs' className='' onClick={handleAdd}>-</Button>
+                <Button size='xs' className='' onClick={() => {removeFromCart(product)}}>-</Button>
                 <p>{product.quantity}</p>
                 <Button size='xs' className='' onClick={handleAdd}>+</Button>
             </div>
