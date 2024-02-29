@@ -1,4 +1,6 @@
 import React from 'react'
+import star from '../assets/star.png'
+
 
 const WideProductCard = ({product}) => {
     // console.log(product)
@@ -14,7 +16,10 @@ const WideProductCard = ({product}) => {
                 </div>
                 <div className="flex items-center justify-between mt-6">
                     <span className="text-l font-bold text-slate-800 dark:text-white">$ {product[0].price}</span>
-                    <p className='font-bold text-yellow-300'>{product[0].rating.rate}</p>
+                    <div className='flex items-center gap-2'>
+                        <img src={star} className="h-4" alt="Star"></img>
+                        <p className='font-bold text-yellow-300'>{product[0].rating.rate}</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -28,7 +33,10 @@ const WideProductCard = ({product}) => {
                 </div>
                 <div className="flex items-center justify-between mt-6">
                     <span className="text-l font-bold text-slate-800 dark:text-white">$ {product[1].price}</span>
-                    <p className='font-bold text-yellow-300'>{product[1].rating.rate}</p>
+                    <div className='flex items-center gap-2'>
+                        <img src={star} className="h-4" alt="Star"></img>
+                        <p className='font-bold text-yellow-300'>{product[1].rating.rate}</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -42,7 +50,10 @@ const WideProductCard = ({product}) => {
                 </div>
                 <div className="flex items-center justify-between mt-6">
                     <span className="text-l font-bold text-slate-800 dark:text-white">$ {product[2].price}</span>
-                    <p className='font-bold text-yellow-300'>{product[2].rating.rate}</p>
+                    <div className='flex items-center gap-2'>
+                        <img src={star} className="h-4" alt="Star"></img>
+                        <p className='font-bold text-yellow-300'>{product[2].rating.rate}</p>
+                    </div>
                 </div>
             </div>
         </div>
