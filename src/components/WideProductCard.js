@@ -8,7 +8,7 @@ const WideProductCard = ({product}) => {
             <a href="#" className='flex justify-center'>
                 <img className="w-60 h-60 p-8 rounded-t-lg object-center" src={product[0].image} alt="product image" />
             </a>
-            <div className="px-5 pb-5">
+            <div className="flex flex-col justify-between px-5 pb-5 h-[9rem]">
                 <div className="flex items-center justify-between">
                     <span className="text-l font-bold text-black-600 dark:text-white">{product[0].title}</span>
                 </div>
@@ -22,7 +22,7 @@ const WideProductCard = ({product}) => {
             <a href="#" className='flex justify-center'>
                 <img className="w-60 h-60 p-8 rounded-t-lg object-center" src={product[1].image} alt="product image" />
             </a>
-            <div className="px-5 pb-5">
+            <div className="flex flex-col justify-between px-5 pb-5 h-[9rem]">
                 <div className="flex items-center justify-between">
                     <span className="text-l font-bold text-black-600 dark:text-white">{product[1].title}</span>
                 </div>
@@ -36,7 +36,7 @@ const WideProductCard = ({product}) => {
             <a href="#" className='flex justify-center'>
                 <img className="w-60 h-60 p-8 rounded-t-lg object-center" src={product[2].image} alt="product image" />
             </a>
-            <div className=" flex flex-col justify-between px-5 pb-5">
+            <div className=" flex flex-col justify-between px-5 pb-5 h-[9rem]">
                 <div className="flex items-center justify-between">
                     <span className="text-l font-bold text-black-600 dark:text-white">{product[2].title}</span>
                 </div>
