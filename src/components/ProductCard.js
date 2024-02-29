@@ -32,11 +32,11 @@ const ProductCard = ({product, addToCart, setCurrentTab, setCurrentProduct}) => 
               <div className="flex items-center justify-between mt-4 mb-2">
                   <span className="text-l font-bold text-slate-800 dark:text-white">$ {product.price}</span>
                   <div className='flex items-center gap-2'>
-                        <img src={star} className="h-4" alt="Star"></img>
-                        <p className='font-bold text-yellow-300'>{product.rating.rate}</p>
-                    </div>
+                      <img src={star} className="h-4" alt="Star"></img>
+                      <p className='font-bold text-yellow-300'>{product.rating.rate}</p>
+                  </div>
               </div>
-              <div className='flex justify-center'>
+              <div className='flex justify-center mt-4'>
                   <Button onClick={handleAdd}>+ Add to cart</Button>
               </div>
             </div>

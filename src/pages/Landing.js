@@ -143,9 +143,9 @@ const Landing = () => {
                             <h1 className='font-bold text-2xl ml-10 mb-6 text-orange-400'>Top Products</h1>
                             <div className=" mb-8 w-full flex  ">
                                 <Carousel slideInterval={2000} className='bg-orange-400 rounded-lg px-20 pt-6 pb-12'>
-                                    <WideProductCard product={topProducts[0]}/>
-                                    <WideProductCard product={topProducts[1]}/>
-                                    <WideProductCard product={topProducts[2]}/>
+                                    <WideProductCard product={topProducts[0]} setCurrentTab={setCurrentTab} setCurrentProduct={setCurrentProduct}/>
+                                    <WideProductCard product={topProducts[1]} setCurrentTab={setCurrentTab} setCurrentProduct={setCurrentProduct}/>
+                                    <WideProductCard product={topProducts[2]} setCurrentTab={setCurrentTab} setCurrentProduct={setCurrentProduct}/>
                                 </Carousel>
                             </div>
                         </div>

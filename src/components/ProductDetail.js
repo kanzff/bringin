@@ -23,7 +23,7 @@ const ProductDetail = ({cart, addToCart, totalPrice, currentProduct}) => {
 
   return (
     <div className='mt-32 flex max-w-screen-2xl min-h-screen justify-center mx-auto p-4'>
-      <div className='h-96 pt-4 bg-white border border-gray-200 rounded-md shadow dark:bg-gray-800 dark:border-gray-700'>
+      <div className='flex flex-col justify-between max-h-[30rem] pt-4 bg-white border border-gray-200 rounded-md shadow dark:bg-gray-800 dark:border-gray-700'>
         <div className="flex max-w-screen-md justify-between gap-8 items-center ">
           <div className='flex justify-center'>
             <div>
@@ -47,7 +47,7 @@ const ProductDetail = ({cart, addToCart, totalPrice, currentProduct}) => {
             </div>
           </div>
         </div>
-          <div className='flex justify-center mt-8'>
+          <div className='flex justify-center my-8'>
             <Button onClick={handleAdd}>+ Add to cart</Button>
           </div>
       </div>
