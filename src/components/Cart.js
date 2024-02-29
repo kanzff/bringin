@@ -1,10 +1,14 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import CheckoutCard from './CheckoutCard'
 import { Button } from 'flowbite-react'
 
 
-const Cart = ({cart, addToCart}) => {
-  console.log('sis', cart)
+const Cart = ({cart, addToCart, totalPrice}) => {
+
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
+
   return (
     <div className='mt-32 max-w-screen-2xl items-center justify-between mx-auto p-4'>
       {!cart.length &&
@@ -26,7 +30,7 @@ const Cart = ({cart, addToCart}) => {
               <div className='w-72'>
                 <div className='flex justify-between mb-4'>
                   <h1 className='font-bold'>Total Price</h1>
-                  <h1 className='font-bold'>$ 1240</h1>
+                  <h1 className='font-bold'>$ {totalPrice}</h1>
                 </div>
                 <hr class="my-4 h-0.5 bg-slate-950"></hr>
                 <Button className='w-full'>Buy</Button>

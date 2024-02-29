@@ -22,12 +22,21 @@ const Landing = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const [cart, setCart] = useState([])
     const [cartCount, setCartCount] = useState(0)
+    const [totalPrice, setTotalPrice] = useState(0)
 
 
     useEffect(() => {
-        // getProducts(15, 0, null, true)
         getPx()
     }, [])
+
+    useEffect(() => {
+        let countTotalPrice = 0
+        cart.map(c => {
+            countTotalPrice += c.totalPrice
+        })
+
+        setTotalPrice(Math.round(countTotalPrice * 100) / 100)
+    }, [cart])
 
     const onPageChange = (page) => {
         setCurrentPage(page);
@@ -79,7 +88,8 @@ const Landing = () => {
                     newArr.push({
                         ...item,
                         productId: item.id,
-                        quantity: e.quantity + 1
+                        quantity: e.quantity + 1,
+                        totalPrice: Math.round((e.totalPrice + e.price) * 100) / 100
                     })
                 } else {
                     newArr.push(e)
@@ -90,7 +100,8 @@ const Landing = () => {
             setCart([...cart, {
                 ...item,
                 productId: item.id,
-                quantity: item.quantity
+                quantity: item.quantity,
+                totalPrice: item.price
             }])
         }
         console.log('cart', cart)
@@ -165,7 +176,7 @@ const Landing = () => {
                 </div>
             }
             {currentTab === 'Cart' &&
-                <Cart cart={cart} addToCart={addToCart}/>
+                <Cart cart={cart} addToCart={addToCart} totalPrice={totalPrice}/>
             }
             {/* footer */}
             <Footer></Footer>

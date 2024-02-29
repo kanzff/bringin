@@ -7,7 +7,8 @@ const ProductCard = ({product, addToCart}) => {
     addToCart({
         ...product,
         productId: product.id,
-        quantity: 1
+        quantity: 1,
+        totalPrice: product.price
     })
   }
 
