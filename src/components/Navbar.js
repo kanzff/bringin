@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import bit_logo  from '../assets/bit_logo.jpg'
+import cart_logo from '../assets/cart_logo.png'
 
 const Navbar = ({setCurrentTab, searchProducts, cartCount, currentTab}) => {
     const navigate = useNavigate()
@@ -39,7 +40,12 @@ const Navbar = ({setCurrentTab, searchProducts, cartCount, currentTab}) => {
                         </form>
                     </div>  
                 }
-                <button onClick={() => setCurrentTab('Cart')} type="button" className="mr-4 text-orange-400 border border-orange-400 hover:bg-slate-100  font-bold rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Cart : {cartCount} items</button>      
+                <button onClick={() => setCurrentTab('Cart')} type="button" className="mr-4 text-orange-400 border border-orange-400 hover:bg-slate-100  font-bold rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                    <div className='flex items-center gap-4'>
+                        <img src={cart_logo} className="w-6" alt="Bit Logo"></img>
+                        <p>{cartCount} Items</p>
+                    </div>
+                </button>      
             </div>
         </nav>
     )
