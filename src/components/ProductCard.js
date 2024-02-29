@@ -26,7 +26,7 @@ const ProductCard = ({product, addToCart, setCurrentTab, setCurrentProduct}) => 
             <div className="flex items-center justify-between">
                 <span className="text-l font-bold text-black-600 dark:text-white">{product.title}</span>
             </div>
-            <div className="flex items-center justify-between mb-2">
+            <div className="flex items-center justify-between mt-4 mb-2">
                 <span className="text-l font-bold text-slate-800 dark:text-white">$ {product.price}</span>
             </div>
             <div>
