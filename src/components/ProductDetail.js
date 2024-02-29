@@ -3,15 +3,16 @@ import CheckoutCard from './CheckoutCard'
 import { Button } from 'flowbite-react'
 
 
-const Cart = ({cart, addToCart, totalPrice}) => {
+const ProductDetail = ({cart, addToCart, totalPrice, currentProduct}) => {
 
   useEffect(() => {
     window.scrollTo(0, 0)
+    console.log(currentProduct)
   }, [])
 
   return (
     <div className='mt-32 max-w-screen-2xl min-h-screen items-center justify-between mx-auto p-4'>
-      {!cart.length &&
+      {/* {!cart.length &&
         <h1 className='font-bold text-xl'>Your cart is empty</h1>
       }
       {!!cart.length &&
@@ -38,9 +39,9 @@ const Cart = ({cart, addToCart, totalPrice}) => {
             </div>
           </div>
         </div>
-      }
+      } */}
     </div>
   )
 }
 
-export default Cart
+export default ProductDetail
