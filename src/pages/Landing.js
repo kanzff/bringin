@@ -181,7 +181,7 @@ const Landing = () => {
                 <Cart cart={cart} addToCart={addToCart} totalPrice={totalPrice}/>
             }
             {currentTab === 'Detail' &&
-                <ProductDetail currentProduct={currentProduct}/>
+                <ProductDetail currentProduct={currentProduct} addToCart={addToCart}/>
             }
             {/* footer */}
             <Footer></Footer>

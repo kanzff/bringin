@@ -10,36 +10,41 @@ const ProductDetail = ({cart, addToCart, totalPrice, currentProduct}) => {
     console.log(currentProduct)
   }, [])
 
+  const handleAdd = () => {
+    addToCart({
+        ...currentProduct,
+        productId: currentProduct.id,
+        quantity: 1,
+        totalPrice: currentProduct.price
+    })
+  }
+
   return (
-    <div className='mt-32 max-w-screen-2xl min-h-screen items-center justify-between mx-auto p-4'>
-      {/* {!cart.length &&
-        <h1 className='font-bold text-xl'>Your cart is empty</h1>
-      }
-      {!!cart.length &&
-        <div className='flex justify-between'>
-          <div className='flex flex-col gap-4'>
-            {
-              cart.map((c, i) => {
-                return (
-                  <CheckoutCard product={c} addToCart={addToCart} key={i}/>
-                )
-              })
-            }
-          </div>
-          <div className='w-1/4'>
-            <div className='ml-12  py-8 flex justify-center bg-white border border-gray-200 rounded-md shadow dark:bg-gray-800 dark:border-gray-700'>
-              <div className='w-72'>
-                <div className='flex justify-between mb-4'>
-                  <h1 className='font-bold'>Total Price</h1>
-                  <h1 className='font-bold'>$ {totalPrice}</h1>
-                </div>
-                <hr class="my-4 h-0.5 bg-slate-950"></hr>
-                <Button className='w-full'>Buy</Button>
+    <div className='mt-32 flex max-w-screen-2xl min-h-screen justify-center mx-auto p-4'>
+      <div className='h-96 bg-white border border-gray-200 rounded-md shadow dark:bg-gray-800 dark:border-gray-700'>
+        <div className="flex max-w-screen-md justify-between gap-8 items-center ">
+          <div className='flex justify-center'>
+            <div>
+              <img className="w-60 h-60 p-8 rounded-t-lg object-center" src={currentProduct.image} alt="currentProduct image" />
+              <div className="flex items-center justify-center mb-2">
+                  <span className="text-l font-bold text-slate-800 dark:text-white">$ {currentProduct.price}</span>
               </div>
             </div>
           </div>
+          <div className="px-5 max-w-sm items-center">
+            <div className="flex items-center justify-between">
+                <span className="text-l font-bold text-black-600 dark:text-white">{currentProduct.title}</span>
+            </div>
+            <hr class="my-4 h-0.5 bg-slate-950"></hr>
+            <div className="flex items-center justify-between">
+                <span className="text-l font-semibold text-black-600 dark:text-white">{currentProduct.description}</span>
+            </div>
+          </div>
         </div>
-      } */}
+          <div className='flex justify-center mt-8'>
+            <Button onClick={handleAdd}>+ Add to cart</Button>
+          </div>
+      </div>
     </div>
   )
 }
