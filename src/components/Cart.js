@@ -3,7 +3,7 @@ import CheckoutCard from './CheckoutCard'
 import { Button } from 'flowbite-react'
 
 
-const Cart = ({cart, addToCart, totalPrice}) => {
+const Cart = ({cart, addToCart, totalPrice, setCurrentTab}) => {
 
   useEffect(() => {
     window.scrollTo(0, 0)
@@ -33,7 +33,7 @@ const Cart = ({cart, addToCart, totalPrice}) => {
                   <h1 className='font-bold'>$ {totalPrice}</h1>
                 </div>
                 <hr class="my-4 h-0.5 bg-slate-950"></hr>
-                <Button className='w-full'>Buy</Button>
+                <Button onClick={() => { setCurrentTab('Checkout')}} className='w-full'>Buy</Button>
               </div>
             </div>
           </div>

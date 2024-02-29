@@ -9,6 +9,7 @@ import { Carousel, Spinner, Pagination } from 'flowbite-react'
 import WideProductCard from '../components/WideProductCard'
 import Cart from '../components/Cart'
 import ProductDetail from '../components/ProductDetail'
+import CheckoutForm from '../components/CheckoutForm'
 
 const Landing = () => {
 
@@ -134,7 +135,7 @@ const Landing = () => {
 
     return (
         <>
-            <Navbar setCurrentTab={setCurrentTab} searchProducts={searchProducts} getPx={getPx} cartCount={cartCount} ></Navbar>
+            <Navbar setCurrentTab={setCurrentTab} currentTab={currentTab} searchProducts={searchProducts} getPx={getPx} cartCount={cartCount} ></Navbar>
             {/* product list */}
             {currentTab === 'Main' &&
                 <div className='mt-32 max-w-screen-2xl items-center justify-between mx-auto p-4'>
@@ -178,10 +179,13 @@ const Landing = () => {
                 </div>
             }
             {currentTab === 'Cart' &&
-                <Cart cart={cart} addToCart={addToCart} totalPrice={totalPrice}/>
+                <Cart cart={cart} addToCart={addToCart} totalPrice={totalPrice} setCurrentTab={setCurrentTab}/>
             }
             {currentTab === 'Detail' &&
                 <ProductDetail currentProduct={currentProduct} addToCart={addToCart}/>
+            }
+            {currentTab === 'Checkout' &&
+                <CheckoutForm/>
             }
             {/* footer */}
             <Footer></Footer>

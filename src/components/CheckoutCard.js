@@ -26,7 +26,7 @@ const CheckoutCard = ({product, addToCart}) => {
                 <span className="text-l font-bold text-slate-800 dark:text-white">$ {product.totalPrice}</span>
             </div>
             <div className='flex gap-4'>
-                <Button size='xs' className='' onClick={handleAdd}>+</Button>
+                <Button size='xs' className='' onClick={handleAdd}>-</Button>
                 <p>{product.quantity}</p>
                 <Button size='xs' className='' onClick={handleAdd}>+</Button>
             </div>
