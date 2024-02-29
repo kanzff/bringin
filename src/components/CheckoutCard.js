@@ -3,7 +3,7 @@ import React from 'react'
 import star from '../assets/star.png'
 
 
-const CheckoutCard = ({product, addToCart}) => {
+const CheckoutCard = ({product, addToCart, setCurrentTab, setCurrentProduct}) => {
 
   const handleAdd = () => {
     addToCart({
@@ -13,12 +13,17 @@ const CheckoutCard = ({product, addToCart}) => {
     })
   }
 
+  const goToDetail = () => {
+    setCurrentTab('Detail')
+    setCurrentProduct(product)
+  }
+
   return (
     <div className="flex max-w-screen-md justify-between items-center bg-white border border-gray-200 rounded-md shadow dark:bg-gray-800 dark:border-gray-700">
-        <div>
-            <a href="#" className='flex justify-center'>
+        <div onClick={goToDetail} className='hover:cursor-pointer'>
+            <div  className='flex justify-center'>
                 <img className="w-60 h-60 p-8 rounded-t-lg object-center" src={product.image} alt="product image" />
-            </a>
+            </div>
             <div className="flex items-center gap-12 justify-center mb-8">
                 <span className="text-l font-bold text-slate-800 dark:text-white">$ {product.price}</span>
                 <div className='flex items-center gap-2'>

@@ -5,7 +5,7 @@ import star from '../assets/star.png'
 
 
 
-const ProductDetail = ({cart, addToCart, totalPrice, currentProduct}) => {
+const ProductDetail = ({cart, addToCart, setCurrentTab, currentProduct}) => {
 
   useEffect(() => {
     window.scrollTo(0, 0)
@@ -47,7 +47,7 @@ const ProductDetail = ({cart, addToCart, totalPrice, currentProduct}) => {
             </div>
           </div>
         </div>
-          <div className='flex justify-center my-8'>
+          <div className='flex gap-4 justify-center my-8'>
             <Button onClick={handleAdd}>+ Add to cart</Button>
           </div>
       </div>

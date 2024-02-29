@@ -178,10 +178,10 @@ const Landing = () => {
                 </div>
             }
             {currentTab === 'Cart' &&
-                <Cart cart={cart} addToCart={addToCart} totalPrice={totalPrice} setCurrentTab={setCurrentTab}/>
+                <Cart cart={cart} addToCart={addToCart} totalPrice={totalPrice} setCurrentTab={setCurrentTab} setCurrentProduct={setCurrentProduct}/>
             }
             {currentTab === 'Detail' &&
-                <ProductDetail currentProduct={currentProduct} addToCart={addToCart}/>
+                <ProductDetail currentProduct={currentProduct} addToCart={addToCart} setCurrentTab={setCurrentTab}/>
             }
             {currentTab === 'Checkout' &&
                 <CheckoutForm/>

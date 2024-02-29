@@ -3,7 +3,7 @@ import CheckoutCard from './CheckoutCard'
 import { Button } from 'flowbite-react'
 
 
-const Cart = ({cart, addToCart, totalPrice, setCurrentTab}) => {
+const Cart = ({cart, addToCart, totalPrice, setCurrentTab, setCurrentProduct}) => {
 
   useEffect(() => {
     window.scrollTo(0, 0)
@@ -20,7 +20,7 @@ const Cart = ({cart, addToCart, totalPrice, setCurrentTab}) => {
             {
               cart.map((c, i) => {
                 return (
-                  <CheckoutCard product={c} addToCart={addToCart} key={i}/>
+                  <CheckoutCard product={c} addToCart={addToCart} key={i} setCurrentTab={setCurrentTab} setCurrentProduct={setCurrentProduct}/>
                 )
               })
             }

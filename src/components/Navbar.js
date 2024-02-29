@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import bit_logo  from '../assets/bit_logo.jpg'
 import cart_logo from '../assets/cart_logo.png'
+import back from '../assets/back.png'
 
 const Navbar = ({setCurrentTab, searchProducts, cartCount, currentTab}) => {
     const navigate = useNavigate()
@@ -22,10 +23,10 @@ const Navbar = ({setCurrentTab, searchProducts, cartCount, currentTab}) => {
     return (
         <nav className="bg-white dark:bg-gray-900 fixed w-full z-20 top-0 start-0 border-b border-gray-200 dark:border-gray-600">
             <div className="max-w-screen-2xl flex flex-wrap items-center justify-between mx-auto p-4">
-                <a href="/" className="flex items-center space-x-3 rtl:space-x-reverse">
+                <div onClick={() => {setCurrentTab('Main')}} className="flex items-center space-x-3 rtl:space-x-reverse hover:cursor-pointer">
                     <img src={bit_logo} className="w-28" alt="Bit Logo"></img>
                     {/* <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Bringin</span> */}
-                </a>
+                </div>
                 {currentTab === 'Main' &&
                     <div className="items-center" id="navbar-sticky">
                         <form>   
@@ -40,12 +41,22 @@ const Navbar = ({setCurrentTab, searchProducts, cartCount, currentTab}) => {
                         </form>
                     </div>  
                 }
-                <button onClick={() => setCurrentTab('Cart')} type="button" className="mr-4 text-orange-400 border border-orange-400 hover:bg-slate-100  font-bold rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                    <div className='flex items-center gap-4'>
-                        <img src={cart_logo} className="w-6" alt="Bit Logo"></img>
-                        <p>{cartCount} Items</p>
-                    </div>
-                </button>      
+                <div className='flex items-center'>
+                    {currentTab !== 'Main' &&
+                        <button onClick={() => setCurrentTab('Main')} type="button" className="mr-4 text-orange-400 border border-orange-400 hover:bg-slate-100  font-bold rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                            <div className='flex items-center gap-4'>
+                                <img src={back} className="w-6" alt="Bit Logo"></img>
+                            </div>
+                        </button>
+                    }
+                    <button onClick={() => setCurrentTab('Cart')} type="button" className="mr-4 text-orange-400 border border-orange-400 hover:bg-slate-100  font-bold rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                        <div className='flex items-center gap-4'>
+                            <img src={cart_logo} className="w-6" alt="Bit Logo"></img>
+                            <p>{cartCount} Items</p>
+                        </div>
+                    </button>      
+                </div>
+
             </div>
         </nav>
     )
