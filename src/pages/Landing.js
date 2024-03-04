@@ -4,7 +4,7 @@ import Navbar from '../components/Navbar'
 import ProductCard from '../components/ProductCard'
 import Footer from '../components/Footer'
 import axios from 'axios'
-import { Carousel, Spinner, Pagination } from 'flowbite-react'
+import { Carousel, Spinner, Pagination, Button, Select, Dropdown } from 'flowbite-react'
 import WideProductCard from '../components/WideProductCard'
 import Cart from '../components/Cart'
 import ProductDetail from '../components/ProductDetail'
@@ -22,6 +22,7 @@ const Landing = () => {
     const [cart, setCart] = useState([])
     const [cartCount, setCartCount] = useState(0)
     const [totalPrice, setTotalPrice] = useState(0)
+    const [category, setCategory] = useState('All')
 
 
     useEffect(() => {
@@ -37,6 +38,10 @@ const Landing = () => {
         setTotalPrice(Math.round(countTotalPrice * 100) / 100)
     }, [cart])
 
+    useEffect(() => {
+        selectCategory(category)
+    }, [category])
+
     const onPageChange = (page) => {
         setCurrentPage(page);
     }
@@ -44,6 +49,16 @@ const Landing = () => {
     const searchProducts = (search) => {
         const filtered = fullProducts.filter(e => e.title.toLowerCase().includes(search.toLowerCase()));
         splitProducts(filtered)
+    }
+
+
+    const selectCategory = (category) => {
+        if (category === 'all') {
+            splitProducts(fullProducts)
+        } else {
+            const filtered = fullProducts.filter(e => e.category === category);
+            splitProducts(filtered)
+        }
     }
 
     const getPx = async (limit) => {
@@ -54,6 +69,7 @@ const Landing = () => {
         axios.get(`https://fakestoreapi.com/products`, {params})
         .then(res => {
             setFullProducts([...res.data])
+            console.log([...res.data])
             splitProducts([...res.data])
             const sortedData = res.data.sort((a, b) => {
                 return b.rating.rate - a.rating.rate
@@ -147,7 +163,19 @@ const Landing = () => {
                         </div>
                     }
                     <div className='available-product'>
-                        <h1 className='font-bold text-2xl ml-10 text-orange-400'>Available Products</h1>
+                        <div className='flex justify-between'>
+                            <h1 className='font-bold text-2xl ml-10 text-orange-400'>Available Products</h1>
+                            <div className='mr-10'>
+                                <Dropdown label={category.toUpperCase()}>
+                                    <Dropdown.Item onClick={() => {setCategory('all')}}>All</Dropdown.Item>
+                                    <Dropdown.Divider />
+                                    <Dropdown.Item onClick={() => {setCategory('electronics')}}>Electronic</Dropdown.Item>
+                                    <Dropdown.Item onClick={() => {setCategory('jewelery')}}>Jewelery</Dropdown.Item>
+                                    <Dropdown.Item onClick={() => {setCategory(`men's clothing`)}}>Men's Clothing</Dropdown.Item>
+                                    <Dropdown.Item onClick={() => {setCategory(`women's clothing`)}}>Women's Clothing</Dropdown.Item>
+                                </Dropdown>
+                            </div>
+                        </div>
                         {!!isLoading &&
                             <div className='flex m-4 justify-center'>
                                 <Spinner color="info" aria-label="Info spinner example" />
